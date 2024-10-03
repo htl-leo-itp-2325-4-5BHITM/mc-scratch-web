@@ -9,7 +9,7 @@ export interface Model {
 }
 
 const initialState: Model = {
-    greeting: "hallo Malte",
+    greeting: "hallo Sebastian",
     users: [],
     todos: []
 }
