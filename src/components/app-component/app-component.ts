@@ -3,8 +3,6 @@ import { Model, store } from "../../model/model"
 import { ToDo } from "../../model/todo"
 import { map } from "rxjs"
 
-
-
 interface RowViewModel {
     id: number
     text: string
@@ -38,8 +36,14 @@ class AppComponent extends HTMLElement {
             )
             .subscribe(userIds => {
                 const content = html`
+                    ${userIds.map(
+                        userId => {
+                            console.log(userId)
+                            return html`<user-todos-component user-id="${userId}"></user-todos-component>`
+                        }
+                    )}
                 `                
-                render(html, this)
+                render(content, this)
             })
     }
 }
