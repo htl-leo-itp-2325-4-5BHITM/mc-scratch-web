@@ -3,6 +3,8 @@ import { Model, store } from "../../model/model"
 import { ToDo } from "../../model/todo"
 import { map } from "rxjs"
 
+
+
 interface RowViewModel {
     id: number
     text: string
@@ -18,14 +20,25 @@ interface ViewModel {
     rows: RowViewModel[]
 }
 
+/*
+app
+über alle user loopen und einen UserTodosComponent erstellen
+
+userTodosComponent
+observedAttributes verwenden um username und todos von der app übergeben zu können
+*/
+
 class AppComponent extends HTMLElement {
     connectedCallback() {
         console.log("App component connected")
         store
-            .pipe(map(toViewModel))
-            .subscribe(usersWithTodos => {
-                const allTodos = getAllTodos(usersWithTodos)
-                const html = layoutTemplate(usersWithTodos, allTodos)
+            .pipe(
+                map(model => model.users), 
+                map(user => user.map(user => user.id))
+            )
+            .subscribe(userIds => {
+                const content = html`
+                `                
                 render(html, this)
             })
     }
